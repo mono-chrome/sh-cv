@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+import H1 from "src/components/atoms/h1.astro";
+import Portrait from "src/components/Portrait.astro";
+---
+
+<Layout title="About">
+  <main class="w-3/4 md:w-auto mx-auto">
+    <H1>About Sebastian</H1>
+    <section class="grid grid-cols-1 md:grid-cols-11 gap-6 max-w-[96ch]">
+      <!--<img class="rounded-sm" src="https://placehold.co/400x500.jpg" width="400" height="500" />-->
+      <Portrait />
+      <div class="col-span-6 text-neutral-900 dark:text-neutral-200">
+        <p class="leading-relaxed">
+          I’ve always been curious, open-minded, and eager to learn! I believe positivity fuels
+          creativity, and I embrace the tension between loving and loathing what I don’t yet
+          understand. I’m driven to look deeper and continually learn more.
+        </p>
+        <p class="leading-relaxed mt-4">
+          My path began in electrical engineering, where I built hardware and software for
+          high-speed measurements. Back then "view source" hooked me on learning how the web worked.
+          I moved on to earn a bachelor’s in graphic design and applied sciences, worked for a few
+          small agencies in Berlin, eventually transitioning into web dev...
+        </p>
+        <p class="leading-relaxed mt-4">
+          I’m proud of my adaptability; I learn quickly when tossed into unfamiliar territory.
+          Outside work, I enjoy making music, taking photos with cameras I restored, hyper-focussing
+          on random topics, teaching my cat tricks, and rediscovering childhood hobbies like
+          painting.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

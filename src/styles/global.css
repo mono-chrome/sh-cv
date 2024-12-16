@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-Light.woff2") format("woff2");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --ring: 216 34% 17%;
+  }
+}
+
+html {
+  /*color-scheme: dark;*/
+  /*background-color: var(--dark-col);*/
+  font-family: 'Geist Mono', monospace, sans-serif;
+}
+
+:root {
+    --dark-col: #121212;
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+
+html,
+body {
+  @apply h-full w-full antialiased;
+  @apply text-base;
+}
+.group .peer {
+  @apply delay-300;
+}
+.group:hover .peer:hover {
+  @apply opacity-100 delay-0 bg-opacity-100 brightness-110 dark:brightness-150 cursor-default;
+}
+.portrait {
+shape-outside: polygon(64% 0%, 82% 7%, 95% 17%, 97% 29%, 95% 40%, 91% 49%, 82% 61%, 69% 73%, 70% 80%, 99% 94%, 100% 99%, 0% 100%, 0% 0%);
+}

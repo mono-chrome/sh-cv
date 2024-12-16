@@ -1,0 +1,214 @@
+---
+import H2 from "./atoms/h2.astro";
+import H3 from "./atoms/h3.astro";
+
+const personalInfo = {
+  name: "Sebastian Töllke",
+  title: "Software Engineer | Digital Experience Innovator",
+  email: "hire@stollke.com",
+  linkedin: "https://www.linkedin.com/in/seb-toellke",
+  github: "https://github.com/mono-chrome",
+  bio: [
+    `Experienced Software Engineer with a demonstrated history of working in the ecommerce industry. I enjoy working with you on traditional and Serverless projects. Whether you're looking to build using on-prem hardware, Cloudflare primitives, or AWS, I’m here to help you make it happen with care and expertise.`,
+    `I enjoy working with JavaScript in the Front End (Svelte, Astro, React, Next.js, Remix, Vue, HonoX), Back End (Node.js, AWS Lambda λ, Cloudflare Workers & Pages, Hono), and Golang for both. Building fast, secure, cost-effective, and smooth User Experiences is extremely satisfying to me. If you need help managing CI/CD flows, I do some of that too.`,
+    `My background is in electrical engineering with a Bachelor of Applied Sciences - BASc (BA) focused in Design and Visual Communication. These days I spend a lot more time exploring and learning about Web technologies, soaking up as much of it as I can.`,
+    `I love just about everything that makes my heart smile; making music, woodworking to build furniture for my tuxedo cat, cooking, exploring, and the occasional twitch stream. I thrive in learning something new every day!`,
+  ],
+};
+
+const experiences = [
+  {
+    title: "Staff Sofware Engineer",
+    company: "JustFab",
+    period: "Nov '23 – Present", 
+    responsibilities: [
+      "Spearheaded the overhaul of complex legacy microservice architecture, simplifying the cloud-native stack by consolidating providers and minimizing service footprint.",
+      "Developed a plan to reduce system-complexity by **~20%** through comprehensive re-evaluation of service needs and serverless architecture.",
+      "Pioneered cost-effective solutions to consolidate API services while maintaining SLA's, leading to a **94%** reduction in average response times and more predictable costs.",
+      "Developed and maintained a robust B2B API for international partners on AWS, utilizing Lambda orchestration, MSSQL, Cloudwatch, Kinesis Streams (to Graylog), Cognito OAuth, and Cloudformation.",
+      "Helped migrate the B2B API using Terraform and GitHub Actions to reduce engineering overhead and improve time-to-delivery by **40%**.",
+      "Architected a highly scalable edge-first inventory planning API, utilizing Cloudflare primitives (Workers, KV, DO, Workflows) at predictable cost and high availability.",
+    ],
+  },
+  {
+    title: "Engineering Team Lead",
+    company: "JustFab",
+    period: "Apr '22 – Nov '23",
+    responsibilities: [
+      "Led an agile, fully remote engineering team at JF Brands (JustFab, Fabkids, and Shoedazzle), driving performance improvements and technical innovation in a focus-team of 4 Engineers.",
+      "High focus on enhancing system stability by **18%**, public caching by a factor of **2.2x**, and driving error logging in Sentry.",
+      "Orchestrated and led the implementation of external CMS (Builder.io) into an existing eco-system of in-house content management, enabling collaboration with **26 more** team-members.",
+    ],
+  },
+];
+
+const educations = [
+  {
+    degree: "Degree Name",
+    institution: "University Name",
+    graduationYear: "Graduation Year",
+    details: ["Relevant coursework or honors."],
+  },
+];
+
+const languages = ["JavaScript (Node.js)", "Golang", "Bash","Python"];
+
+const libFrameworks = ["React", "Next.js", "Remix", "SolidJS", "Vue", "Nuxt", "Svelte", "Astro"];
+
+const libStyle = ["Redux", "Jōtai", "Zustand", "Styled Components", "Tailwind CSS", "SASS/SCSS"];
+
+const libTools = ["Vitest", "Jest", "Puppeteer" , "Vite", "Webpack", "Turbopack", "Turborepo", "Nx"];
+
+const libBackend = ["Hono", "ElisyaJS", "NestJS", "AWS", "Cloudflare"];
+
+const libTooling = ["Git", "Docker", "Figma", "SST"];
+
+const projects = [
+  {
+    name: "Project Name",
+    link: "https://github.com/yourusername/project",
+    description: ["Brief description of the project.", "Technologies used."],
+  },
+];
+
+const certifications = [
+  {
+    name: "Certification Name",
+    issuer: "Issuing Organization",
+    year: "Year",
+  },
+];
+
+function formatItem(item: string) {
+  if (!item.includes('*')) return item;
+
+  const itemParts = item.split(/(\*\*.+?\*\*)/);
+  for (let item in itemParts) {
+    if (itemParts[item].includes('*')) {
+      const contents = itemParts[item].replaceAll('*','');
+      itemParts[item] = `<span class="font-bold text-indigo-500 dark:text-indigo-300">${contents}</span>`;
+    }
+  }
+  return itemParts.join('');
+}
+---
+
+<div class="max-w-[96ch]">
+  <header class="text-neutral-700 dark:text-neutral-200">
+    <p class="text-lg">
+      {personalInfo.name}
+    </p>
+    <p class="text-lg">
+      {personalInfo.title}
+    </p>
+    <div class="underline md:no-underline underline-offset-2 flex md:flex-row md:items-center gap-3 md:gap-4 my-4">
+      <a href={`mailto:${personalInfo.email}`} class="text-fuchsia-400 hover:underline underline-offset-2">
+        {personalInfo.email}
+      </a>
+      <span class="hidden md:inline text-gray-500">|</span>
+      <a href={personalInfo.linkedin} target="_blank" class="text-fuchsia-400 hover:underline underline-offset-2">
+        LinkedIn
+      </a>
+      <span class="hidden md:inline text-gray-500">|</span>
+      <a href={personalInfo.github} target="_blank" class="text-fuchsia-400 hover:underline underline-offset-2">
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <section class="text-neutral-700 dark:text-neutral-200 mb-8">
+    {personalInfo.bio.map((line, i) => (
+      <p class=`leading-relaxed${i > 0 ? ' mt-4':''}`>
+      {line}{i === personalInfo.bio.length - 1 && <span
+        class="rounded-sm text-neutral-500 dark:text-neutral-300 h-full bg-neutral-500 dark:bg-neutral-300 animate-blink">_</span
+      >}
+      </p>
+    ))}
+  </section>
+
+  <section class="mb-12">
+    <H2>Experience</H2>
+    <div class="space-y-8">
+      {
+        experiences.map((job) => (
+          <div>
+            <H3>
+              {job.title}
+              <span class="text-neutral-500 dark:text-neutral-400"> at {job.company}</span>
+            </H3>
+            <span class="text-neutral-600 dark:text-neutral-300">{job.period}</span>
+            <ul class="text-neutral-700 dark:text-neutral-200 mt-4 px-6 space-y-2">
+              {job.responsibilities.map((item) => (
+              <li class="list-['-_']" set:html={formatItem(item)} />
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!--<section class="mb-12">
+    <H2>Education</H2>
+    <div class="space-y-4">
+      {
+        educations.map((edu) => (
+          <div>
+            <H3>{edu.degree}</H3>
+            <span class="text-neutral-400">
+              {edu.institution}, {edu.graduationYear}
+            </span>
+            <ul class="text-neutral-300 mt-4 px-6 space-y-2">
+              {edu.details.map((detail) => (
+                <li class="list-['-_']" set:html={formatItem(detail)} />
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>-->
+
+  <section class="mb-12 group">
+    <H2>Technical Expertise</H2>
+    <ul class="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-4 mb-4 text-neutral-900 dark:text-neutral-200">
+      {languages.map((language) => <li class="peer lg:border transition duration-200 border-emerald-800 bg-emerald-200/30 dark:bg-emerald-900/40 px-4 py-1 lg:rounded">{language}</li>)}
+    </ul>
+    <ul class="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-4 mb-4 text-neutral-900 dark:text-neutral-200">
+      {libFrameworks.map((lib) => <li class="peer lg:border transition duration-200 border-cyan-800 bg-cyan-200/30 dark:bg-cyan-900/40 px-4 py-1 lg:rounded">{lib}</li>)}
+    </ul>
+        <ul class="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-4 mb-4 text-neutral-900 dark:text-neutral-200">
+      {libStyle.map((lib) => <li class="peer lg:border transition duration-200 border-indigo-800 bg-indigo-200/30 dark:bg-indigo-900/40 px-4 py-1 lg:rounded">{lib}</li>)}
+    </ul>
+    <ul class="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-4 mb-4 text-neutral-900 dark:text-neutral-200">
+      {libTools.map((lib) => <li class="peer lg:border transition duration-200 border-violet-800 bg-violet-200/30 dark:bg-violet-900/40 px-4 py-1 lg:rounded">{lib}</li>)}
+    </ul>
+    <ul class="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-4 mb-4 text-neutral-900 dark:text-neutral-200">
+      {libBackend.map((lib) => <li class="peer lg:border transition duration-200 border-fuchsia-800 bg-fuchsia-200/30 dark:bg-fuchsia-900/40 px-4 py-1 lg:rounded">{lib}</li>)}
+    </ul>
+    <ul class="grid grid-cols-2 lg:flex lg:flex-wrap lg:gap-4 text-neutral-900 dark:text-neutral-200">
+      {libTooling.map((lib) => <li class="peer lg:border transition duration-200 border-rose-800 bg-rose-200/30 dark:bg-rose-900/40 px-4 py-1 lg:rounded">{lib}</li>)}
+    </ul>
+  </section>
+
+  <section class="mb-12">
+    <H2>Projects</H2>
+    <div class="space-y-8">
+      {
+        projects.map((project) => (
+          <div>
+            <H3>{project.name}</H3>
+            <a href={project.link} target="_blank" class="text-fuchsia-400 hover:underline underline-offset-2">
+              View on GitHub
+            </a>
+            <ul class="text-neutral-300 mt-4 px-6 space-y-2">
+              {project.description.map((desc) => (
+                <li class="list-['-_']" set:html={formatItem(desc)} />
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</div>

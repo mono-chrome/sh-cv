@@ -1,0 +1,92 @@
+---
+const { pathname } = Astro.url;
+---
+
+<nav class="w-3/4 md:w-[96ch] mx-auto flex gap-3 mt-8 mb-10 text-neutral-900 dark:text-neutral-50">
+  <a
+    class=`hover:text-purple-500 dark:hover:text-purple-300 ${pathname === '/' ? 'text-fuchsia-500 dark:text-fuchsia-200' : ''}`
+    href="/">[c] cv</a
+  >
+  <span class="text-gray-500">|</span>
+  <a
+    class=`hover:text-purple-500 dark:hover:text-purple-300 ${pathname.includes('about') ? 'text-fuchsia-500 dark:text-fuchsia-200' : ''}`
+    href="/about"
+    >[a] about
+  </a>
+  <button id="dlm" class="flex items-center ml-auto">
+    <span class="mr-2">[l]</span>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <g class="hidden dark:block">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+      </g>
+      <g class="dark:hidden">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9"></path>
+        <path d="M20 3v4"></path>
+        <path d="M22 5h-4"></path>
+      </g>
+    </svg>
+  </button>
+</nav>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+  import { toggleDarkMode } from "../scripts/theme.js";
+
+  const navTo = throttle(navCall, 50);
+  let lastExecution = 0;
+
+  function throttle(func: Function, execLimit: number) {
+    return function (...args: any) {
+      const now = Date.now();
+      if (now - lastExecution >= execLimit) {
+        lastExecution = now;
+        func(...args);
+      }
+    };
+  }
+
+  function navCall(path: string) {
+    navigate(path, { history: "push" });
+  }
+
+  //@ts-expect-error
+  dlm.addEventListener("click", (e: Event) => {
+    e.preventDefault();
+    toggleDarkMode();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "j") {
+      window.scrollBy(0, 80);
+    }
+    if (e.key === "k") {
+      window.scrollBy(0, -80);
+    }
+    if (e.key === "c") {
+      navTo("/");
+    }
+    if (e.key === "a") {
+      navTo("/about");
+    }
+    if (e.key === "l") {
+      toggleDarkMode();
+    }
+  });
+</script>
